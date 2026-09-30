@@ -351,7 +351,7 @@ footer{padding:28px 0;text-align:center;color:#5d6b7a;font-size:13px;font-family
         </div>
         <div class="pub">
           <div class="t">Behavioral Analysis of Malware in a Controlled Virtual Environment: A Case Study Approach</div>
-          <div class="v">Preprint · Zenodo, 2026</div>
+          <div class="v">Preprint · Zenodo, 2026<span id="zenodoStats"></span></div>
           <a href="https://doi.org/10.5281/zenodo.20736284" target="_blank" rel="noopener">DOI: 10.5281/zenodo.20736284 ↗</a>
         </div>
       </div>
@@ -509,6 +509,17 @@ links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('ope
 const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+  
+<script>
+fetch('https://zenodo.org/api/records/20736284')
+  .then(r => r.json())
+  .then(d => {
+    const s = d.stats || {};
+    if (s.unique_downloads) document.getElementById('zenodoStats').textContent =
+      ` · ${s.unique_downloads} downloads · ${s.unique_views} views`;
+  })
+  .catch(() => {});
 </script>
 </body>
 </html>
